@@ -24,7 +24,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no root@95.164.113.115 << 'EOF'
             cd /home/dave/taskmanager_bot
-            git pull origin main
+            git pull origin master
             source venv/bin/activate
             pip install -r requirements.txt
             sudo systemctl restart taskmanager-bot
