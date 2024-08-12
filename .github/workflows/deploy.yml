@@ -3,7 +3,7 @@ name: Deploy Bot
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -13,17 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to server
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.taskmanager_bot }}
+      - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "${{ secrets.taskmanager_bot }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 95.164.113.115 >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        run: |
           ssh -o StrictHostKeyChecking=no root@95.164.113.115 << 'EOF'
             cd /home/dave/taskmanager_bot
-            git pull origin master
-            source venv/bin/activate  
+            git pull origin main
+            source venv/bin/activate
             pip install -r requirements.txt
             sudo systemctl restart taskmanager-bot
           EOF

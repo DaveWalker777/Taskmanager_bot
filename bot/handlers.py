@@ -44,7 +44,7 @@ async def handle_number_of_input(message: types.Message):
     await message.answer("Вы можете выбрать данные снова:", reply_markup=keyboard)
 
 async def ask_theme_id(message: types.Message):
-    await message.answer("TESTTEST", reply_markup=ReplyKeyboardRemove())
+    await message.answer("TEST", reply_markup=ReplyKeyboardRemove())
 
 async def handle_theme_id(message: types.Message):
     theme_id_str = message.text
