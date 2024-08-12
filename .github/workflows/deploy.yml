@@ -29,3 +29,4 @@ jobs:
             pip install -r requirements.txt
             sudo systemctl restart taskmanager-bot
           EOF
+
