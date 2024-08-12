@@ -15,7 +15,7 @@ jobs:
 
       - name: Deploy to server
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.taskmanager }}
+          SSH_PRIVATE_KEY: ${{ secrets.taskmanager_bot }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
